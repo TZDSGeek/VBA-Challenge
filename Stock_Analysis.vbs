@@ -1,6 +1,6 @@
 Sub Stock_Analysis()
 
-'Forloop for worksheets
+'Use "For Each ws" to loop through each worksheet
     For Each ws In Worksheets
         ws.Activate
 
@@ -23,7 +23,7 @@ Sub Stock_Analysis()
     Dim Summary_Total_Row As Integer
     Summary_Total_Row = 2
 
-'Set the total row for the yearly change,Percentage Change, and total Stock volume
+'Set the total row for the yearly change, percentage change, and total stock volume
     Yearly_Change = 0
     Percentage_Change = 0
     Total_Stock_Volume = 0
@@ -37,7 +37,7 @@ Sub Stock_Analysis()
     Open_Price = Cells(2, "C").Value
 
     
-'Add row summary headers
+'Add the row summary headers
 
     Range("I1").Value = "Ticker"
     Range("J1").Value = "Yearly Change"
@@ -47,7 +47,7 @@ Sub Stock_Analysis()
 'Create Forloop
     For i = 2 To Last_Row
 
-'Set Ticker and Total Stock Volume
+'Set ticker and the total stock volume
         Ticker = Cells(i, "A").Value
         Total_Stock_Volume_Var = Cells(i, "G").Value
 
@@ -62,14 +62,14 @@ Sub Stock_Analysis()
             Percentage_Change = Yearly_Change / Open_Price * 100
             Total_Stock_Volume = Total_Stock_Volume + Total_Stock_Volume_Var
 
-'Print Ticker, Yearly Change,Percentage Change, and Total Stock Volume
+'Print the ticker, yearly change, percentage Change, and the total stock volume
 
             Range("I" & Summary_Total_Row).Value = Ticker
             Range("J" & Summary_Total_Row).Value = Yearly_Change
             Range("K" & Summary_Total_Row).Value = "%" & Percentage_Change
             Range("L" & Summary_Total_Row).Value = Total_Stock_Volume
             
-'Create Conditional formating for the Yearly Change
+'Create conditional formating for the yearly change
             
             If (Yearly_Change > 0) Then
             
@@ -84,7 +84,7 @@ Sub Stock_Analysis()
                 
             End If
             
-'Create Conditional formating for the Percentage Change
+'Create conditional formating for the percentage change
 
     If (Percentage_Change > 0) Then
             
@@ -104,7 +104,7 @@ Sub Stock_Analysis()
 
             Summary_Total_Row = Summary_Total_Row + 1
     
-'Reset the Open Price and Total Stock Volume
+'Reset the open price and the total stock volume
 
             Open_Price = Cells(i + 1, "C").Value
             
@@ -114,7 +114,7 @@ Sub Stock_Analysis()
 
         Else
 
-'Add the Values again
+'Add the values again
 
            Total_Stock_Volume = Total_Stock_Volume + Total_Stock_Volume_Var
 
@@ -126,7 +126,7 @@ Sub Stock_Analysis()
 'Create the summaries
 '--------------------------------------------------------------------------
 
-'Create Summary Row Headers
+'Create the summary row headers
 
         Range("O2").Value = "Greatest Percent Increase"
         Range("O3").Value = "Greatest Percent Decrease"
@@ -138,13 +138,13 @@ Sub Stock_Analysis()
 
         summary_last_row = Cells(Rows.Count, "I").End(xlUp).Row
         
-'Greatest increase,Decrease,and total volume Variables
+'Declare the greatest increase,greatest decrease,and total volume Variables
 
         greatest_percent_increase = Cells(2, "K").Value
         greatest_percent_decrease = Cells(2, "K").Value
         greatest_total_volume = Cells(2, "L").Value
         
-'Create forloop for greatest_percent_increase
+'Create the forloop for each summary
 
         For Row = 2 To summary_last_row
         
